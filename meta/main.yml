@@ -1,0 +1,17 @@
+galaxy_info:
+  author: aleksey
+  description: Installs and configures Vector log shipper for ClickHouse
+  license: MIT
+  min_ansible_version: "2.10"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - noble
+        - jammy
+  galaxy_tags:
+    - vector
+    - logging
+    - clickhouse
+    - monitoring
+
+dependencies: []

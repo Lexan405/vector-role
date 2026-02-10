@@ -1,0 +1,31 @@
+# Ansible artifacts
+*.retry
+*.log
+artifacts/
+
+# Secrets (CRITICAL!)
+secrets/
+*.key
+*.pem
+*.env
+vault-password.txt
+group_vars/*/*.yml
+host_vars/*/*.yml
+
+# Dependencies (installed via requirements.yml)
+roles/
+collections/
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Python cache
+__pycache__/
+*.pyc

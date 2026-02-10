@@ -1,0 +1,15 @@
+---
+# Vector configuration
+vector_config_path: /etc/vector/vector.toml
+
+# ClickHouse sink settings
+clickhouse_host: "localhost"
+clickhouse_port: 8123
+clickhouse_database: "logs"
+clickhouse_table: "vector_logs"
+
+# Docker source settings
+vector_docker_source_enabled: true
+vector_docker_socket: "unix:///var/run/docker.sock"
+vector_include_containers:
+  - "clickhouse-server"

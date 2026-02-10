@@ -1,0 +1,18 @@
+{% if vector_docker_source_enabled %}
+[sources.docker_logs]
+type = "docker_logs"
+docker_host = "{{ vector_docker_socket }}"
+include_containers = {{ vector_include_containers | to_json }}
+auto_partial_event_merging = true
+{% endif %}
+
+[sinks.clickhouse]
+type = "clickhouse"
+{% if vector_docker_source_enabled %}
+inputs = ["docker_logs"]
+{% endif %}
+endpoint = "http://{{ clickhouse_host }}:{{ clickhouse_port }}"
+database = "{{ clickhouse_database }}"
+table = "{{ clickhouse_table }}"
+skip_unknown_fields = true
+encoding.codec = "json"
