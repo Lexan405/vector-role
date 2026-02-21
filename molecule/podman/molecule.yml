@@ -3,10 +3,10 @@ dependency:
   name: galaxy
   enabled: false
 driver:
-  name: docker
+  name: podman
 platforms:
   - name: instance
-    image: geerlingguy/docker-ubuntu2004-ansible:latest
+    image: docker.io/geerlingguy/docker-ubuntu2004-ansible:latest
     pre_build_image: true
 provisioner:
   name: ansible

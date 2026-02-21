@@ -1,6 +1,6 @@
 ---
-- name: Create marker file (idempotent)
+- name: Create marker
   copy:
-    content: "Vector role executed successfully"
-    dest: /tmp/vector_marker.txt
+    content: "OK"
+    dest: /tmp/marker.txt
     mode: '0644'

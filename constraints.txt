@@ -1,0 +1,4 @@
+molecule<4.0
+molecule-podman==1.1.0
+ansible-compat<2.0
+cryptography<40.0
