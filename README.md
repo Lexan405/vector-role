@@ -29,3 +29,19 @@
         vector_include_containers:
           - "clickhouse-server"
           - "nginx"
+
+
+# Тестирование:
+## Molecule
+
+![](screenshot/1.png)
+
+![](screenshot/1.1.png)
+
+![](screenshot/1.2.png)
+
+## Tox
+
+![](screenshot/2.png)
+
+Сценарий default использует драйвер docker и требует доступа к Docker socket. В изолированном окружении tox внутри Docker-контейнера доступ к сокету ограничен. Сценарий podman работает корректно.
