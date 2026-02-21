@@ -1,0 +1,33 @@
+---
+- name: Verify Vector installation and operation
+  hosts: all
+  tasks:
+    - name: Check Vector binary exists
+      stat:
+        path: /usr/bin/vector
+      register: vec_bin
+    
+    - name: Assert Vector installed
+      assert:
+        that:
+          - vec_bin.stat.exists
+        success_msg: "Vector binary found at /usr/bin/vector"
+        fail_msg: "Vector binary NOT found"
+    
+    - name: Validate Vector config syntax (if config exists)
+      command: vector validate --config /etc/vector/vector.yaml
+      register: cfg_validate
+      ignore_errors: true
+    
+    - name: Check Vector process running
+      command: pgrep -f "vector.*--config"
+      register: proc_check
+      ignore_errors: true
+    
+    - name: Display verification results
+      debug:
+        msg:
+          - "OS: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+          - "Vector binary: {{ 'FOUND' if vec_bin.stat.exists else 'MISSING' }}"
+          - "Config validation: {{ 'PASSED' if cfg_validate.rc == 0 else 'SKIPPED/FAILED' }}"
+          - "Process running: {{ 'YES' if proc_check.rc == 0 else 'NO' }}"

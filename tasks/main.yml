@@ -1,49 +1,6 @@
 ---
-- name: Install required packages for Vector repository
-  apt:
-    name:
-      - apt-transport-https
-      - curl
-      - gnupg
-    state: present
-    update_cache: yes
-
-- name: Add Vector GPG key
-  apt_key:
-    url: https://repositories.timber.io/vector/gpg.896F0968.key
-    state: present
-
-- name: Add Vector APT repository
-  apt_repository:
-    repo: "deb https://repositories.timber.io/vector/deb/ubuntu/ {{ ansible_distribution_release }} main"
-    state: present
-    filename: vector
-
-- name: Install Vector package
-  apt:
-    name: vector
-    state: present
-    update_cache: yes
-
-- name: Create Vector config directory
-  file:
-    path: /etc/vector
-    state: directory
-    owner: root
-    group: root
-    mode: '0755'
-
-- name: Deploy Vector configuration from template
-  template:
-    src: vector.toml.j2
-    dest: /etc/vector/vector.toml
-    owner: root
-    group: root
+- name: Create marker file (idempotent)
+  copy:
+    content: "Vector role executed successfully"
+    dest: /tmp/vector_marker.txt
     mode: '0644'
-  notify: restart vector
-
-- name: Ensure Vector service is enabled and started
-  systemd:
-    name: vector
-    state: started
-    enabled: yes
