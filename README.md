@@ -29,6 +29,7 @@
         vector_include_containers:
           - "clickhouse-server"
           - "nginx"
+```
 
 
 # Тестирование:
